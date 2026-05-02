@@ -1,0 +1,7 @@
+{
+  "name": "driverApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
