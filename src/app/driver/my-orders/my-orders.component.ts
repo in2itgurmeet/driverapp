@@ -14,7 +14,6 @@ import { debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil } fro
   styleUrls: ['./my-orders.component.scss'],
 })
 export class MyOrdersComponent {
-
   searchControl = new FormControl('');
   private destroy$ = new Subject<void>();
   orderData: any[] = [];
@@ -59,7 +58,6 @@ export class MyOrdersComponent {
             this.activeTab === 1
               ? ''
               : this.tabStatusMap[this.activeTab];
-
           return this.api.myOrderHistory(
             search?.trim() || '',
             status

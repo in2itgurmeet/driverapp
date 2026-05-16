@@ -1,3 +1,133 @@
-<p>
-  profile works!
-</p>
+<ion-content class="profile-content">
+  <form [formGroup]="DriverProfileForm">
+    <div class="profile-wrapper">
+      <div class="profile-card">
+        <div class="profile-image-wrapper">
+          <img [src]="profileImage" alt="Profile" class="profile-image" />
+          <div class="camera-icon" (click)="openUploadModal()">
+            <i class="fa fa-camera text-white"></i>
+          </div>
+        </div>
+        <h2 class="user-name">
+          {{ DriverProfileForm.value.name }}
+        </h2>
+        <p class="user-username">
+          {{ DriverProfileForm.value.email }}
+        </p>
+      </div>
+      <div class="upload-overlay" *ngIf="isUploadModalOpen" (click)="closeUploadModal()">
+        <div class="upload-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Upload Image</h3>
+            <ion-icon name="close-outline" class="close-icon" (click)="closeUploadModal()"></ion-icon>
+          </div>
+          <div class="upload-box" (click)="fileInput.click()">
+            <input type="file" hidden #fileInput accept="image/*" (change)="onFileSelected($event)" />
+            <ion-icon name="cloud-upload" class="upload-icon"></ion-icon>
+            <h2>Upload your file here</h2>
+            <p>Files supported: JPG, PNG</p>
+            <span class="or-text">OR</span>
+            <button type="button" class="browse-btn">
+              BROWSE
+            </button>
+            <small>Maximum size: 2MB</small>
+          </div>
+          <div class="file-preview" *ngIf="selectedFile">
+            <div class="file-left">
+              <ion-icon name="document" class="file-icon"></ion-icon>
+              <div>
+                <h4>{{ selectedFile.name }}</h4>
+                <p>
+                  {{ (selectedFile.size / 1024).toFixed(0) }} KB
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group">
+            <ion-button fill="outline" color="medium" (click)="closeUploadModal()">
+              Cancel
+            </ion-button>
+            <ion-button color="primary" [disabled]="!selectedFile" (click)="uploadImage()">
+              Upload
+            </ion-button>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="input-group">
+          <label>Name</label>
+          <ion-input type="text" fill="outline" formControlName="name">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Email</label>
+          <ion-input type="email" fill="outline" formControlName="email">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Phone</label>
+          <ion-input type="tel" fill="outline" formControlName="phone">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Address</label>
+          <ion-textarea autoGrow="true" fill="outline" formControlName="address">
+          </ion-textarea>
+        </div>
+        <div class="input-group">
+          <label>City</label>
+          <ion-input type="text" fill="outline" formControlName="city">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>State</label>
+          <ion-input type="text" fill="outline" formControlName="state">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Vehicle Number</label>
+          <ion-input type="text" fill="outline" formControlName="vehicleNumber">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Vehicle Type</label>
+          <ion-input type="text" fill="outline" formControlName="vehicleType">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Vehicle Capacity</label>
+          <ion-input type="text" fill="outline" formControlName="vehicleCapacity">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>License Number</label>
+          <ion-input type="text" fill="outline" formControlName="licenseNumber">
+          </ion-input>
+        </div>
+        <div class="input-group">
+          <label>Aadhaar Number</label>
+          <ion-input type="text" fill="outline" formControlName="aadhaarNumber">
+          </ion-input>
+        </div>
+        <div class="toggle-group">
+          <ion-item lines="none">
+            <ion-label>Online Status</ion-label>
+            <ion-toggle formControlName="isOnline">
+            </ion-toggle>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>Available</ion-label>
+            <ion-toggle formControlName="isAvailable">
+            </ion-toggle>
+          </ion-item>
+        </div>
+        <ion-button expand="block" shape="round" class="update-btn" (click)="updateProfile()">
+
+          Update Profile
+
+        </ion-button>
+
+      </div>
+    </div>
+  </form>
+</ion-content>

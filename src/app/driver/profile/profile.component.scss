@@ -1,0 +1,368 @@
+/* profile.page.scss */
+
+.profile-content {
+  --background: #f3f3f3;
+}
+
+.profile-wrapper {
+  padding: 16px;
+}
+
+/* =========================
+   Profile Card
+========================= */
+
+.profile-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 30px 20px 24px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.profile-image-wrapper {
+  position: relative;
+  width: 95px;
+  height: 95px;
+  margin: 0 auto 18px;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #dbe7ff;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #fff;
+
+  ion-icon {
+    color: #fff;
+    font-size: 18px;
+  }
+}
+
+.user-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.user-username {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #8b8b8b;
+}
+
+/* =========================
+   Form Card
+========================= */
+
+.form-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px 16px;
+}
+
+.input-group {
+  margin-bottom: 22px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+  }
+}
+
+/* Ionic Input Outline */
+
+ion-input {
+  --border-radius: 12px;
+  --padding-start: 14px;
+  --padding-end: 14px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+
+  font-size: 16px;
+  color: #222;
+}
+
+/* Active Border */
+
+ion-input.ion-focused {
+  --border-color: #4c8dff;
+}
+
+/* Date Input */
+
+.date-item {
+  --background: transparent;
+  --border-color: #d9d9d9;
+  --border-width: 1px;
+  --border-style: solid;
+  --border-radius: 12px;
+
+  min-height: 54px;
+  padding-inline-start: 12px;
+  padding-inline-end: 12px;
+
+  ion-input {
+    --padding-start: 0;
+  }
+
+  ion-icon {
+    font-size: 20px;
+    color: #777;
+  }
+}
+/* ================= PROFILE IMAGE ================= */
+
+.profile-image-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+
+  background: #2563eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  border: 3px solid #fff;
+
+  i {
+    font-size: 16px;
+  }
+}
+
+/* ================= OVERLAY ================= */
+
+.upload-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  backdrop-filter: blur(3px);
+}
+
+/* ================= MODAL ================= */
+
+.upload-modal {
+  width: 100%;
+  max-width: 420px;
+
+  background: #fff;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  animation: popupAnimation 0.25s ease;
+}
+
+/* ================= HEADER ================= */
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+  }
+}
+
+.close-icon {
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* ================= UPLOAD BOX ================= */
+
+.upload-box {
+  border: 2px dashed #c7d7ff;
+
+  border-radius: 12px;
+
+  padding: 35px 20px;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  &:hover {
+    background: #f8fbff;
+  }
+}
+
+.upload-icon {
+  font-size: 52px;
+  color: #2563eb;
+  margin-bottom: 14px;
+}
+
+.upload-box h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.upload-box p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.or-text {
+  display: block;
+  margin-bottom: 14px;
+  color: #555;
+  font-weight: 600;
+}
+
+.browse-btn {
+  border: 1px solid #2563eb;
+  background: transparent;
+  color: #2563eb;
+
+  padding: 10px 22px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  margin-bottom: 12px;
+}
+
+.upload-box small {
+  display: block;
+  color: #888;
+}
+
+/* ================= FILE PREVIEW ================= */
+
+.file-preview {
+  margin-top: 18px;
+
+  background: #f5f3f3;
+
+  border-radius: 10px;
+
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.file-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-icon {
+  font-size: 26px;
+  color: #2563eb;
+}
+
+.file-preview h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+}
+
+.file-preview p {
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+}
+
+.delete-icon {
+  font-size: 24px;
+  color: red;
+  cursor: pointer;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  margin-top: 22px;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes popupAnimation {
+
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

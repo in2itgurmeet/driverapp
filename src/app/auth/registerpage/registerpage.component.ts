@@ -118,9 +118,6 @@ initForm() {
     });
   }
 
-
-
-
   getCountry() {
     this.apiService.getCountry().subscribe((country) => {
       this.country = country;
