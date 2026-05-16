@@ -1,0 +1,166 @@
+<ion-col class="container-fluid_main scrollable-container">
+  <ion-row class="row p-2" style="background: rgb(245, 245, 245) !important">
+    <ion-header class="bg-white tab-bar">
+      <div class="g-0">
+        <a [ngClass]="{'active': activeTab===1}" (click)="setActiveTab(1)">All</a>
+        <a [ngClass]="{'active': activeTab===2}" (click)="setActiveTab(2)">Draft</a>
+        <a [ngClass]="{'active': activeTab===3}" (click)="setActiveTab(3)">Booked</a>
+        <a [ngClass]="{'active': activeTab===4}" (click)="setActiveTab(4)">Assigned</a>
+        <a [ngClass]="{'active': activeTab===5}" (click)="setActiveTab(5)">In-Transit</a>
+        <a [ngClass]="{'active': activeTab===6}" (click)="setActiveTab(6)">Delivered</a>
+        <a [ngClass]="{'active': activeTab===7}" (click)="setActiveTab(7)">Cancelled</a>
+      </div>
+    </ion-header>
+    <ion-text class="main-container mt-5">
+      <ion-text class="content_section">
+        <ion-text class="top_search_bar">
+          <ion-text class="Container_Top">
+            <ion-col class="Serch_continer">
+              <ion-text class="icon_svg_section">
+                <i class="fa fa-search " aria-hidden="true"></i>
+              </ion-text>
+              <ion-text class="svg_text_section" style="height: 40px;">
+                <ion-input type="text" class="form_input" id="exampleInputPassword1" placeholder="Search Order..."
+                  style="border: none !important; margin: 0px !important;" placeholder="Search Order..."
+                  [formControl]="searchControl" />
+              </ion-text>
+            </ion-col>
+          </ion-text>
+        </ion-text>
+      </ion-text>
+      <ion-text class="content_section ">
+        @for (item of orderData; track $index) {
+        <ion-card class="mt-2 m-0 pt-1 px-2">
+          <ion-text class="Card_section_top pt-2">
+            <ion-text class="Headding_top">
+              <h6 class="fw-bold text-dark">{{ item.orderId }}</h6>
+              <p style="width: max-content;">Trip/No: {{ item.tripNo }}</p>
+            </ion-text>
+            <ion-text class="Button_section">
+              <span class="badge" [ngClass]="getStatusClass(item.status)">
+                {{ item.status }}
+              </span>
+            </ion-text>
+          </ion-text>
+          <ion-text class="d-flex justify-content-center px-1 g-0 m-0">
+            <hr class="w-100" />
+          </ion-text>
+          <ion-text class="Pickupx_address">
+            <ion-text class="Pickup_section">
+              <ion-text>
+                <p class="title">Pickup</p>
+                <p class="sub_tittle ellipsis">
+                  {{ item.pickup.location }}
+                </p>
+                <p class="Ph_num">
+                  {{ item.pickup.person }}: {{ item.pickup.phone }}
+                </p>
+              </ion-text>
+              <ion-text>
+                <p class="title text-danger">Delivery</p>
+                <p class="sub_tittle ellipsis">
+                  {{ item.delivery.location }}
+                </p>
+                <p class="Ph_num">
+                  {{ item.delivery.person }}: {{ item.delivery.phone }}
+                </p>
+              </ion-text>
+              <ion-popover trigger="address-{{item.id}}">
+                <ng-template>
+                  <ion-content class="ion-padding">
+                    {{ item.pickup.location }}
+                  </ion-content>
+                </ng-template>
+              </ion-popover>
+            </ion-text>
+            <ion-text class="Weight_messure_section mt-1">
+              <p class="Weight_Mes">
+                <span><i class="fa fa-cube"></i></span>
+                {{ item.weight }} | QTY: {{ item.quantity }}
+              </p>
+              <p class="Weight_Mes">
+                <span><i class="fa fa-subway"></i></span>
+                {{ item.vehicle }} | {{ item.capacity }}
+              </p>
+              <p class="Weight_Mes">
+                <span><i class="fa fa-credit-card"></i></span>
+                ₹{{ item.amount }} | {{ item.paymentType }}
+              </p>
+            </ion-text>
+          </ion-text>
+          <ion-text class="d-flex justify-content-center px-1 g-0 m-0">
+            <hr class="dashed">
+          </ion-text>
+          <ion-text class="Pickup_section">
+            <ion-text>
+              <p class="fw-bold">Booking Type: {{ item.bookingType }}</p>
+            </ion-text>
+            <ion-text class="buton_more">
+              <ion-button class="submit_button Serch_continer" (click)="handleAction(item)"
+                [disabled]="isButtonDisabled(item.status)">
+                {{ getButtonText(item.status) }}
+              </ion-button>
+              <ion-button [id]="'setting-' + item.id" fill="clear" class="setting_button">
+                <i class="fa fa-ellipsis-h"></i>
+              </ion-button>
+            </ion-text>
+          </ion-text>
+          <br>
+        </ion-card>
+        <ion-popover [trigger]="'setting-' + item.id" side="bottom" alignment="start" [dismissOnSelect]="true"
+          [showBackdrop]="false">
+          <ng-template>
+            <ion-content>
+              <ion-list class="list px-3" (click)="getLorryReciept(item.id)">
+                <ion-text>
+                  Print LR
+                </ion-text>
+                <ion-text [routerLink]="['/indexpage/booked/',item.orderId]">
+                  See Order Details
+                </ion-text>
+                <ion-text (click)="canCancel(item.status) && cancelOrder(item)"
+                  [ngClass]="{'disabled-text': !canCancel(item.status)}">
+                  Cancel Order
+                </ion-text>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+        }
+      </ion-text>
+    </ion-text>
+  </ion-row>
+</ion-col>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ion-popover trigger="bottom-start" side="bottom" alignment="start" cssClass="custom-popover" [dismissOnSelect]="true">
+  <ng-template>
+    <ion-content class="ion-padding ">
+      <ion-list class="list">
+        <ion-text >
+          Create FTL Order
+        </ion-text>
+        <ion-text>
+          Create PTL Order
+        </ion-text>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-popover>

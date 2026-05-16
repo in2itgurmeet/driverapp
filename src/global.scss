@@ -35,3 +35,25 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+ion-content.hide-scrollbar::part(scroll) {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+ion-content.hide-scrollbar::part(scroll)::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+ion-input input::placeholder {
+  font-size: smaller !important;
+}
+
+/* Select placeholder text */
+ion-select::part(text) {
+  font-size: smaller;
+    --background: #ffffff;
+}
+
+ion-input{
+  margin-top: 5px;
+}

@@ -1,0 +1,75 @@
+<ion-content class="dashboard-page">
+  <div class="top-header">
+    <div>
+      <h2>Available Orders</h2>
+      <p>Live incoming bookings</p>
+    </div>
+    <ion-badge color="danger">
+      {{ orders.length }}
+    </ion-badge>
+  </div>
+  <div class="empty-box" *ngIf="orders.length === 0">
+    <ion-icon name="cube-outline"></ion-icon>
+    <p>No Orders Available</p>
+  </div>
+  <div class="order-list">
+    <ion-card class="order-card"
+      *ngFor="let item of orders">
+      <div class="top-strip">
+        <span class="tag new-tag"
+          *ngIf="item.status === 'Booked'">
+          New Order
+        </span>
+        <span class="tag reject-tag"
+          *ngIf="item.rejected">
+          Rejected
+        </span>
+        <span class="price">
+          ₹{{ item.amount }}
+        </span>
+      </div>
+      <div class="vehicle-box">
+        <img src="assets/image/dasboard_truck_logo.png">
+      </div>
+      <h3>{{ item.orderId }}</h3>
+      <div class="chips">
+        <span>{{ item.vehicle?.name }}</span>
+        <span>{{ item.vehicle?.capacity }}</span>
+        <span>{{ item.quantity }} Qty</span>
+        <span>{{ item.weight }}</span>
+      </div>
+      <div class="route-box">
+        <p>
+          📍 {{ item.pickup?.location }}
+        </p>
+        <p>
+          🚚 {{ item.delivery?.location }}
+        </p>
+      </div>
+      <div class="btn-row">
+        <ion-button
+          color="success"
+          size="small"
+          *ngIf="!item.rejected && item.status === 'Booked'"
+          (click)="acceptOrder(item)">
+          Accept
+        </ion-button>
+        <ion-button
+          color="danger"
+          fill="outline"
+          size="small"
+          *ngIf="!item.rejected && item.status === 'Booked'"
+          (click)="rejectOrder(item)">
+          Reject
+        </ion-button>
+        <ion-button
+          disabled="true"
+          color="medium"
+          size="small"
+          *ngIf="item.rejected">
+          Rejected
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

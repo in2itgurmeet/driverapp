@@ -1,0 +1,108 @@
+<ion-content class="hide-scrollbar" fullscreen="true">
+
+    <div class="container-fluid custom-scrollbar">
+      <div class="row  bg_liner">
+        <div class="text-center img_container p-0">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/074/397/818/small/powerful-truck-silhouette-hauling-cargo-along-desert-highway-at-fiery-sunset-free-photo.jpeg"
+            class=""
+          />
+        </div>
+
+        <!-- Form Section -->
+        <div class="ion-padding form_content">
+
+          <div class="d-flex justify-content-center">
+            <hr class="w-25" />
+          </div>
+
+          <div class="Header_informer text-center">
+            <h2>DRIVER LOGIN</h2>
+            <p>Welcome Back Driver :-)</p>
+          </div>
+
+          <form [formGroup]="loginForm">
+
+            <!-- Email / Phone -->
+            <div class="mb-2 d-flex flex-column">
+              <ion-label>Email / Phone</ion-label>
+              <ion-input
+                type="text"
+                placeholder="Enter Email or Phone"
+                formControlName="login">
+              </ion-input>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-2 d-flex flex-column position-relative">
+
+              <ion-label>Password</ion-label>
+
+              <div class="input-container">
+
+                <ion-input
+                  [type]="passwordType"
+                  placeholder="Enter your password"
+                  formControlName="password">
+                </ion-input>
+
+                <ion-icon
+                  [name]="passwordIcon"
+                  (click)="togglePasswordVisibility()"
+                  class="icon_eye">
+                </ion-icon>
+
+              </div>
+
+              <p
+                class="forget-password"
+                [routerLink]="['/auth/forget-password']">
+                Forget Password?
+              </p>
+
+            </div>
+
+            <ion-button
+              expand="block"
+              class="mt-3"
+              (click)="onSubmit()">
+              Login
+            </ion-button>
+            <p class="text-center mt-3">
+              Don't have an account?
+              <a [routerLink]="['/auth/register']">
+                Sign Up
+              </a>
+            </p>
+
+            <!-- Divider -->
+            <div class="d-flex align-items-center justify-content-center mt-3">
+              <hr class="flex-grow-1">
+              <span class="mx-2">Or</span>
+              <hr class="flex-grow-1">
+            </div>
+
+            <!-- Social -->
+            <div class="d-flex justify-content-between mt-3">
+
+              <ion-button class="col-5">
+                <i class="fa fa-google-plus me-1"></i>
+                Google
+              </ion-button>
+
+              <ion-button class="col-5">
+                <i class="fa fa-twitter me-1"></i>
+                Twitter
+              </ion-button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+</ion-content>

@@ -1,0 +1,113 @@
+/* driver-dashboard.component.scss */
+
+.dashboard-page {
+  --background: #f7f7f7;
+  padding: 14px;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+  }
+}
+
+.order-card {
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.06);
+}
+
+.top-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 30px;
+}
+
+.new-tag {
+  background: #eefaf0;
+  color: green;
+}
+
+.reject-tag {
+  background: #ffeaea;
+  color: red;
+}
+
+.price {
+  font-weight: 700;
+  color: #222;
+}
+
+.vehicle-box {
+  text-align: center;
+  margin: 12px 0;
+
+  img {
+    width: 160px;
+  }
+}
+
+h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  span {
+    background: #f2f2f2;
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+}
+
+.route-box {
+  margin-top: 12px;
+
+  p {
+    margin: 4px 0;
+    font-size: 13px;
+    color: #555;
+  }
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.empty-box {
+  text-align: center;
+  padding: 70px 0;
+  color: #999;
+
+  ion-icon {
+    font-size: 55px;
+  }
+}

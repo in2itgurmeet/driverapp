@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #e74c3c;
+  --background-color: #ecf0f1;
+  --text-color: #2c3e50;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600 !important;
+}
+
+/* Set scrollbar track color */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  /* Transparent background */
+}
+
+/* Set scrollbar thumb color */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  /* Color of the thumb */
+  display: none;
+}
+
+/* Set scrollbar thumb on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+  /* Darker color on hover */
+}
+
+/* Hide scrollbar when not hovered */
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  display: none;
+  /* Restore color when hovered */
+}
+
+/* Hide scrollbar track */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 2px;
+  /* Width of the scrollbar */
+  display: none;
+  /* Hide scrollbar by default */
+}
+
+.custom-scrollbar {
+  overflow: scroll;
+}
+
+/* Show scrollbar on hover */
+.custom-scrollbar:hover::-webkit-scrollbar {
+  display: block;
+  /* Show scrollbar when hovered */
+}
+
+.m_auto {
+  margin: 0 auto;
+}
+
+.jus_center {
+  display: flex;
+  justify-content: center;
+}
+
+ion-button {
+  border: none;
+  text-transform: capitalize;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.Svg_content {
+  background-color: aliceblue;
+}
+
+.Input_chamber,
+.Form_content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.native-input.sc-ion-input-md {
+  padding-left: 12px !important;
+}
+
+// .container_ormore {
+//   display: flex;
+//   justify-content: center;
+//   text-align: center;
+//   /* Align text and headings to the center */
+// }
+
+// .container_ormore img {
+//   margin: -22px 0px 0px 0px;
+//   height: 53px;
+//   width: 140px;
+// }
+
+hr {
+  width: 100%;
+  border: none;
+  border-top: 0.5px solid #b9b8b8;
+}
+
+.submit_button {
+  --background: #ff6347;
+  --background-activated: #e5533d;
+  --background-focused: #d94b36;
+  --background-hover: #f0654d;
+  --color: #fff;
+  font-size: 12px;
+}
+
+.Social_icon {
+  --background: #ff6347;
+  --background-activated: #e5533d;
+  --background-focused: #d94b36;
+  --background-hover: #f0654d;
+  --color: #fff;
+  font-size: 12px;
+  height: 30px;
+  /* Optional: text color */
+  /* Optional: text color */
+}
+
+.Social_icon_container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+ion-button::part(native) {
+  border-radius: 5px;
+  box-shadow: none !important;
+}
+
+// ion-input {
+//   // Override styles for the sc-ion-input-md-h class
+//   &.sc-ion-input-md-h {
+//     margin-top: 0 !important; // Remove the top margin
+//   }
+// }
+
+.bg_liner {
+  background-image: linear-gradient(
+    to bottom,
+    #4bccc3,
+    #0f6e4f,
+    white
+  ) !important;
+}
+
+
+
+
+.Back_button {
+  position: relative;
+  top: 20px;
+  left: 10px;
+}
+
+.Back_button img {
+  background: white;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.resend_text p {
+  color: #ff6347;
+  display: flex;
+  justify-content: end;
+  padding: 5px;
+}
+
+.Header_informer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.Header_informer h2 {
+  color: #ff6347;
+  font-weight: 500;
+}
+
+.lh-3 {
+  line-height: 8px !important;
+}
+
+.fs-2 {
+  font-size: 13px !important;
+}
+
+.booked {
+  color: #ce20fa;
+}
+
+.hr_lines {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+.bottom_text_movie_card {
+  padding-left: 0px !important;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  border: 8px solid #ddd;
+  border-top: 8px solid red;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+// .main_container_box {
+//   width: fit-content;
+// }

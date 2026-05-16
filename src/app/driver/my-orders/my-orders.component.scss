@@ -1,0 +1,259 @@
+.tab-bar {
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 7px;
+  background: white;
+  width: 100%;
+  overflow: scroll;
+  position: fixed;
+  top: -1px;
+  right: 0px;
+  z-index: 999;
+}
+
+.tab-bar a {
+  text-decoration: none;
+  color: black;
+  border: none;
+  padding: 10px 30px 0px 0px;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.tab-bar a.active {
+  color: orange;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.tab-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.tab-bar::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.tab-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.Container_Top {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  justify-content: space-between;
+}
+
+.Serch_continer {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px !important;
+  height: max-content;
+}
+
+.Button_section {
+  width: calc(100% - 80%);
+  max-width: calc(100% - 80%);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Button_section button {
+  background: #ff6347;
+  padding: 7px;
+  border-radius: 5px;
+  color: white;
+  height: fit-content;
+  margin: 0 auto;
+}
+.submit_button {
+  font-size: smaller;
+}
+.icon_svg_section {
+  width: calc(100% - 90%);
+  max-width: calc(100% - 90%);
+  padding: 0px 5px;
+  overflow: hidden !important;
+}
+
+.svg_text_section {
+  width: calc(100% - 10%);
+  max-width: calc(100% - 10%);
+  display: flex;
+  overflow: hidden !important;
+  align-items: center;
+}
+
+.ion-padding {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.Card_section_top {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Card_section_top ion-text {
+  width: calc(96% / 2);
+  max-width: calc(96% / 2);
+  display: flex;
+}
+
+.Headding_top {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  flex-direction: column;
+  line-height: 10px;
+}
+
+.Pickupx_address {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  flex-direction: column;
+  line-height: 10px;
+}
+.disabled-text {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.Pickup_section {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  line-height: 10px;
+}
+.ellipsis {
+  width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.Pickup_section ion-text {
+  width: calc(98% / 2);
+  max-width: calc(98% / 2);
+  display: flex;
+  padding: 3px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+ion-text p {
+  line-height: 20px;
+  margin: 0px;
+}
+
+.title {
+  font-size: 12px;
+  color: green;
+}
+
+.sub_tittle {
+  font-weight: bold;
+}
+
+.Ph_num,
+.sub_tittle {
+  font-size: 12px;
+}
+
+.Weight_messure_section {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  line-height: 20px;
+}
+
+.Weight_Mes {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+hr.dashed {
+  border: 0;
+  border-top: 2px dashed #000;
+  margin: 20px 0;
+  color: white;
+}
+
+.buton_more span {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 5px;
+}
+
+.buton_more span :hover {
+  background-color: #fac1b7;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.buton_more {
+  width: calc(100%);
+  max-width: calc(100%);
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+ion-card {
+  border-radius: 10px;
+}
+
+.badge {
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  ion-text {
+    padding: 0px 5px;
+    font-size: small;
+  }
+}
+
+.list ion-text:hover {
+  color: #ff6347;
+}
+
+.custom-popover {
+  --width: 150px;
+  --offset-x: 0px;
+}
+
+.row {
+  --bs-gutter-x: 0rem !important;
+}
