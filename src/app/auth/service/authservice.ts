@@ -48,5 +48,8 @@ export class AuthService {
     );
   }
 
+  getVehicles(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/vehicles`);
+  }
 
 }

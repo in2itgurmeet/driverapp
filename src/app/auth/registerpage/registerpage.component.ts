@@ -39,13 +39,22 @@ vehicles:any;
     private apiService: AuthService,
     private defultService: DefultUsageService
   ) { 
-    this.vehicles = this.defultService.vehicles
+    this.vehicles = this.defultService.vehicles;
   }
 
 
   ngOnInit() {
     this.initForm();
     this.getCountry();
+    this.apiService.getVehicles().subscribe({
+      next: (res: any) => {
+        this.vehicles = res.data || [];
+      },
+      error: (err: any) => {
+        console.error('Failed to load vehicles:', err);
+        this.vehicles = this.defultService.vehicles;
+      }
+    });
 
   }
 

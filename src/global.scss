@@ -36,6 +36,22 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
+html, body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+}
+
+* {
+  scrollbar-width: none !important;
+}
+
 ion-content.hide-scrollbar::part(scroll) {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
