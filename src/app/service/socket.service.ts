@@ -23,8 +23,6 @@ export class SocketService {
     }
 
     this.socket.on('notification', (data: any) => {
-      console.log('Notification Received:', data);
-
       const current = this.notificationCount.value;
       this.notificationCount.next(current + 1);
     });
@@ -32,5 +30,11 @@ export class SocketService {
 
   resetCount() {
     this.notificationCount.next(0);
+  }
+
+  joinRoom(userId: string) {
+    if (this.socket) {
+      this.socket.emit('join', userId);
+    }
   }
 }
