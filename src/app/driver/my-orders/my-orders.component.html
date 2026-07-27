@@ -65,7 +65,7 @@
                   {{ item.delivery.person }}: {{ item.delivery.phone }}
                 </p>
               </ion-text>
-              <ion-popover trigger="address-{{item.id}}">
+              <ion-popover trigger="address-{{item._id}}">
                 <ng-template>
                   <ion-content class="ion-padding">
                     {{ item.pickup.location }}
@@ -100,27 +100,20 @@
                 [disabled]="isButtonDisabled(item.status)">
                 {{ getButtonText(item.status) }}
               </ion-button>
-              <ion-button [id]="'setting-' + item.id" fill="clear" class="setting_button">
+              <ion-button [id]="'setting-' + item._id" fill="clear" class="setting_button">
                 <i class="fa fa-ellipsis-h"></i>
               </ion-button>
             </ion-text>
           </ion-text>
           <br>
         </ion-card>
-        <ion-popover [trigger]="'setting-' + item.id" side="bottom" alignment="start" [dismissOnSelect]="true"
+        <ion-popover [trigger]="'setting-' + item._id" side="bottom" alignment="start" [dismissOnSelect]="true"
           [showBackdrop]="false">
           <ng-template>
             <ion-content>
-              <ion-list class="list px-3" (click)="getLorryReciept(item.id)">
-                <ion-text>
-                  Print LR
-                </ion-text>
-                <ion-text [routerLink]="['/indexpage/booked/',item.orderId]">
+              <ion-list class="list px-3" (click)="handleAction(item)">
+                <ion-text style="cursor: pointer; display: block; padding: 10px 0;">
                   See Order Details
-                </ion-text>
-                <ion-text (click)="canCancel(item.status) && cancelOrder(item)"
-                  [ngClass]="{'disabled-text': !canCancel(item.status)}">
-                  Cancel Order
                 </ion-text>
               </ion-list>
             </ion-content>

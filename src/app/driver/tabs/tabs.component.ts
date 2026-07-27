@@ -11,6 +11,7 @@ import {
 } from 'ionicons/icons';
 @Component({
   selector: 'app-tabs',
+  standalone: true,
   imports: [IonicModule, CommonModule],
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],

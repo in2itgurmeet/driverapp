@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DriverDashbaordComponent } from './driver-dashbaord/driver-dashbaord.component';
-import { SettingsComponent } from './settings/settings.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { ProfileComponent } from './profile/profile.component';
 import { TabsComponent } from './tabs/tabs.component';
 
 const routes: Routes = [
@@ -11,34 +7,32 @@ const routes: Routes = [
     path: '',
     component: TabsComponent,
     children: [
-
       {
         path: 'home',
-        component: DriverDashbaordComponent
+        loadComponent: () => import('./driver-dashbaord/driver-dashbaord.component').then(m => m.DriverDashbaordComponent)
       },
-
       {
         path: 'myOrders',
-        component: MyOrdersComponent
+        loadComponent: () => import('./my-orders/my-orders.component').then(m => m.MyOrdersComponent)
       },
-
       {
         path: 'settings',
-        component: SettingsComponent
+        loadComponent: () => import('./settings/settings.component').then(m => m.SettingsComponent)
       },
-
       {
         path: 'profile',
-        component: ProfileComponent
+        loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent)
       },
-
       {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
       }
-
     ]
+  },
+  {
+    path: 'order-detail/:id',
+    loadComponent: () => import('./order-detail/order-detail.component').then(m => m.OrderDetailComponent)
   }
 ];
 

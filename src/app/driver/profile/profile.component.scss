@@ -352,6 +352,11 @@ ion-input.ion-focused {
   margin-top: 22px;
 }
 
+.update-btn, .upgrade-btn {
+  --border-radius: calc(10 * var(--px));
+  font-weight: 700;
+}
+
 /* ================= ANIMATION ================= */
 
 @keyframes popupAnimation {

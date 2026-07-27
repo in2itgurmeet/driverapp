@@ -18,8 +18,8 @@ export class Apiservice {
     return this.http.post(`${environment.apiUrl}/auth/driver/login`, data);
   }
 
-  getAllNotifications(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/auth/driver/profile`);
+  getNotifications(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/notification/list`);
   }
   getProfileImage(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/auth/driver/profile-image`);
@@ -33,11 +33,8 @@ export class Apiservice {
   updateDriverProfile(data: any): Observable<any> {
     return this.http.put(`${environment.apiUrl}/auth/driver/profile`, data);
   }
-  getUnreadCount(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/notification/unread-count`);
-  }
-  markAsRead(id: string): Observable<any> {
-    return this.http.patch(`${environment.apiUrl}/notification/read/${id}`, {});
+  markNotificationAsRead(id: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/notification/read/${id}`, {});
   }
 
 
@@ -62,5 +59,21 @@ export class Apiservice {
     return this.http.get(
       `${environment.apiUrl}/driver-order/history${query}`
     );
+  }
+
+  updateOrderStatus(orderId: string, status: string): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/driver-order/status/${orderId}`, { status });
+  }
+
+  uploadPOD(orderId: string, payload: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/driver-order/pod/${orderId}`, payload);
+  }
+
+  getOrderById(orderId: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/order/${orderId}`);
+  }
+
+  getDriverStats(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/driver-order/stats`);
   }
 }

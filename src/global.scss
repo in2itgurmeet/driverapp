@@ -57,10 +57,6 @@
   src: url(assets/fonts/Lato-Black.ttf);
 }
 
-.fa {
-  font-family: FontAwesome !important;
-}
-
 body,
 html {
   font-family: "Lato", sans-serif;
@@ -85,7 +81,7 @@ html {
 div,
 a,
 p,
-* {
+*:not(i):not(.fa):not(.fab):not(.fas):not(.far):not([class*="fa-"]) {
   font-family: "Lato", sans-serif !important;
 }
 
@@ -1365,8 +1361,11 @@ input:focus-visible {
 html,
 body {
   overscroll-behavior-y: none;
-}
 
+}
+::ng-deep .inner-scroll .scroll-y{
+  scrollbar-width: none !important; 
+}
 /* Left Menu Icon Css Start */
 .menu-text {
   min-width: calc(4.6666666667rem / var(--scale));
@@ -2643,7 +2642,7 @@ p {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif !important;
 
-  * {
+  *:not(i):not(.fa):not(.fab):not(.fas):not(.far):not([class*="fa-"]) {
     font-family: "Poppins", sans-serif !important;
   }
 }

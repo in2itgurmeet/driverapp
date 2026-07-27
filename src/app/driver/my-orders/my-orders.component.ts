@@ -9,7 +9,8 @@ import { debounceTime, distinctUntilChanged, Subject, switchMap, takeUntil } fro
 
 @Component({
   selector: 'app-my-orders',
-  imports: [IonicModule, CommonModule, RouterLink, ReactiveFormsModule],
+  standalone: true,
+  imports: [IonicModule, CommonModule, ReactiveFormsModule],
   templateUrl: './my-orders.component.html',
   styleUrls: ['./my-orders.component.scss'],
 })
@@ -141,18 +142,18 @@ export class MyOrdersComponent {
    */
   getButtonText(status: string): string {
     switch (status) {
-      case 'Pending':
-        return 'Book Now';
-      case 'Booked':
-        return 'View Details';
+      case 'Assigned':
+        return 'Start Pickup';
+      case 'Pickup Started':
+        return 'Start Journey';
       case 'In-Transit':
-        return 'Track Order';
+        return 'Mark Delivered';
       case 'Delivered':
         return 'Completed';
       case 'Cancelled':
         return 'Cancelled';
       default:
-        return 'Book Now';
+        return 'View Details';
     }
   }
 
@@ -162,20 +163,8 @@ export class MyOrdersComponent {
     * @author Gurmeet kumar
     */
   handleAction(item: any) {
-    switch (item.status) {
-      case 'Pending':
-        this.router.navigate(['/indexpage/booking'], {
-          queryParams: { orderId: item.orderId }
-        });
-        break;
-      case 'Booked':
-        this.router.navigate(['/indexpage/order-details', item.orderId]);
-        break;
-      case 'In-Transit':
-        this.router.navigate(['/indexpage/tracking-Order', item.orderId]);
-        break;
-      default:
-        console.log('No action for this status');
+    if (item._id) {
+      this.router.navigate(['/dashboard/order-detail', item._id]);
     }
   }
 

@@ -1,0 +1,244 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard/myOrders" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Trip Details</ion-title>
+    <ion-badge slot="end" color="dark" class="header-badge" *ngIf="orderData">
+      {{ orderData.status }}
+    </ion-badge>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Loading state -->
+  <div *ngIf="loading" class="spinner-container">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Loading trip details...</p>
+  </div>
+
+  <!-- Loaded state -->
+  <div *ngIf="!loading && orderData">
+    <!-- Trip Action Card -->
+    <ion-card class="action-card glass-card">
+      <ion-card-content>
+        <div class="status-summary">
+          <div class="status-icon-box">
+            <ion-icon name="checkmark-circle-outline" color="primary" class="large-icon"></ion-icon>
+          </div>
+          <div class="status-meta">
+            <h2>Order ID: {{ orderData.orderId }}</h2>
+            <p>Trip No: <strong class="text-dark">{{ orderData.tripNo || 'N/A' }}</strong></p>
+            <p>Booking Type: <strong class="text-dark">{{ orderData.bookingType }}</strong></p>
+          </div>
+          <div class="price-badge">
+            ₹{{ orderData.amount }}
+          </div>
+        </div>
+
+        <div class="action-button-row mt-3">
+          <!-- ASSIGNED STATUS -->
+          <ion-button expand="block" color="warning" class="main-action-btn"
+            *ngIf="orderData.status === 'Assigned'"
+            (click)="updateStatus('Pickup Started')">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Start Pickup
+          </ion-button>
+
+          <!-- PICKUP STARTED STATUS -->
+          <ion-button expand="block" color="primary" class="main-action-btn"
+            *ngIf="orderData.status === 'Pickup Started'"
+            (click)="updateStatus('In-Transit')">
+            <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+            Start Journey (In-Transit)
+          </ion-button>
+
+          <!-- IN-TRANSIT STATUS -->
+          <ion-button expand="block" color="success" class="main-action-btn"
+            *ngIf="orderData.status === 'In-Transit'"
+            (click)="openPodModal()">
+            <ion-icon name="document-text-outline" slot="start"></ion-icon>
+            Mark Delivered & Upload POD
+          </ion-button>
+
+          <!-- DELIVERED STATUS -->
+          <div class="success-banner" *ngIf="orderData.status === 'Delivered'">
+            <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+            <span>Delivered Successfully</span>
+          </div>
+
+          <!-- CANCELLED STATUS -->
+          <div class="danger-banner" *ngIf="orderData.status === 'Cancelled'">
+            <span>Order Cancelled</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Address / Route Card -->
+    <ion-card class="route-card glass-card mt-3">
+      <ion-card-header>
+        <ion-card-title>Route & Contacts</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="timeline">
+          <!-- Pickup -->
+          <div class="timeline-item">
+            <div class="marker pickup-marker"></div>
+            <div class="timeline-content">
+              <h3>Pickup Point</h3>
+              <p class="address-text">{{ orderData.pickup.location }}</p>
+              
+              <div class="contact-box" *ngIf="orderData.pickup.person">
+                <span class="person-name">{{ orderData.pickup.person }}</span>
+                <div class="contact-actions">
+                  <ion-button fill="clear" size="small" (click)="callNumber(orderData.pickup.phone)">
+                    <ion-icon name="call-outline" slot="icon-only" color="primary"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" size="small" (click)="navigateAddress(orderData.pickup.location)">
+                    <ion-icon name="map-outline" slot="icon-only" color="secondary"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Line between timeline items -->
+          <div class="timeline-connector"></div>
+
+          <!-- Delivery -->
+          <div class="timeline-item">
+            <div class="marker delivery-marker"></div>
+            <div class="timeline-content">
+              <h3>Delivery Point</h3>
+              <p class="address-text">{{ orderData.delivery.location }}</p>
+              
+              <div class="contact-box" *ngIf="orderData.delivery.person">
+                <span class="person-name">{{ orderData.delivery.person }}</span>
+                <div class="contact-actions">
+                  <ion-button fill="clear" size="small" (click)="callNumber(orderData.delivery.phone)">
+                    <ion-icon name="call-outline" slot="icon-only" color="primary"></ion-icon>
+                  </ion-button>
+                  <ion-button fill="clear" size="small" (click)="navigateAddress(orderData.delivery.location)">
+                    <ion-icon name="map-outline" slot="icon-only" color="secondary"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Cargo / Material details -->
+    <ion-card class="material-card glass-card mt-3">
+      <ion-card-header>
+        <ion-card-title>Cargo Details</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="cargo-details-grid">
+          <div class="grid-item">
+            <span class="label">Material Description</span>
+            <span class="value">{{ orderData.cargo?.goodsDescription || 'N/A' }}</span>
+          </div>
+          <div class="grid-item">
+            <span class="label">Weight</span>
+            <span class="value">{{ orderData.weight || 'N/A' }}</span>
+          </div>
+          <div class="grid-item">
+            <span class="label">Quantity</span>
+            <span class="value">{{ orderData.quantity }} Units</span>
+          </div>
+          <div class="grid-item" *ngIf="orderData.cargo?.dimension">
+            <span class="label">Dimensions</span>
+            <span class="value">{{ orderData.cargo?.dimension }}</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- POD UPLOAD MODAL -->
+  <ion-modal [isOpen]="isPodModalOpen" (didDismiss)="closePodModal()">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar color="primary">
+          <ion-title>Submit POD</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closePodModal()">Cancel</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding modal-content-bg">
+        <div class="pod-form">
+          <h2>Receiver Confirmation</h2>
+          
+          <ion-item class="form-item mt-2" lines="none">
+            <ion-label position="stacked">Receiver Name</ion-label>
+            <ion-input type="text" [(ngModel)]="receiverName" placeholder="Enter who received the goods"></ion-input>
+          </ion-item>
+
+          <ion-item class="form-item mt-2" lines="none">
+            <ion-label position="stacked">Receiver Phone (Optional)</ion-label>
+            <ion-input type="tel" [(ngModel)]="receiverMobile" placeholder="Enter receiver mobile no."></ion-input>
+          </ion-item>
+
+          <!-- Signature Pad -->
+          <div class="signature-section mt-3">
+            <div class="sig-header">
+              <h3>Receiver Signature</h3>
+              <ion-button fill="clear" size="small" color="danger" (click)="clearSignature()">
+                Clear
+              </ion-button>
+            </div>
+            
+            <div class="canvas-container">
+              <canvas #sigCanvas 
+                (mousedown)="startDrawing($event)" 
+                (mousemove)="draw($event)" 
+                (mouseup)="stopDrawing()" 
+                (mouseleave)="stopDrawing()"
+                (touchstart)="startDrawing($event)" 
+                (touchmove)="draw($event)" 
+                (touchend)="stopDrawing()">
+              </canvas>
+            </div>
+          </div>
+
+          <!-- Photo upload -->
+          <div class="photo-section mt-3">
+            <h3>Cargo Delivery Photo</h3>
+            <p class="section-desc">Take a photo of loaded/unloaded goods or the physically signed invoice.</p>
+            
+            <div class="photo-selector-box">
+              <input type="file" id="podPhotoFile" accept="image/*" (change)="onPhotoSelected($event)" class="hidden-input" />
+              <label for="podPhotoFile" class="photo-upload-label" *ngIf="!deliveryPhotoBase64">
+                <ion-icon name="image-outline"></ion-icon>
+                <span>Choose / Capture Photo</span>
+              </label>
+
+              <!-- Thumbnail view -->
+              <div class="thumbnail-container" *ngIf="deliveryPhotoBase64">
+                <img [src]="deliveryPhotoBase64" alt="Delivery Proof" class="img-thumbnail" />
+                <ion-button color="danger" fill="clear" size="small" (click)="deliveryPhotoBase64 = ''">
+                  Remove Photo
+                </ion-button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Remarks -->
+          <ion-item class="form-item mt-3" lines="none">
+            <ion-label position="stacked">Remarks / Feedbacks</ion-label>
+            <ion-textarea rows="3" [(ngModel)]="remarks" placeholder="Any comments (e.g. goods delivered safely)"></ion-textarea>
+          </ion-item>
+
+          <ion-button expand="block" color="success" class="submit-pod-btn mt-4" (click)="submitPOD()">
+            Confirm Delivery & Save POD
+          </ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

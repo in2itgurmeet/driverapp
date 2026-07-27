@@ -141,61 +141,62 @@ export class ProfileComponent implements OnInit {
 
 
   closeUploadModal() {
-  this.isUploadModalOpen = false;
-}
-
-onFileSelected(event: any) {
-  const file = event.target.files[0];
-  if (file) {
-    this.selectedFile = file;
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.profileImage = e.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  }
-}
-
-
-/* ================= REMOVE FILE ================= */
-
-removeSelectedFile() {
-  this.selectedFile = null as any;
-}
-
-
-/* ================= UPLOAD IMAGE ================= */
-
-uploadImage() {
-
-  if (!this.selectedFile) {
-    return;
+    this.isUploadModalOpen = false;
   }
 
-  const formData = new FormData();
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.profileImage = e.target.result;
+      };
 
-  formData.append(
-    'profileImage',
-    this.selectedFile
-  );
+      reader.readAsDataURL(file);
+    }
+  }
 
-  this.service.uploadImage(formData)
-    .subscribe({
+  upgradeProfile() {
+    this.toastController.create({
+      message: 'Upgrade functionality coming soon!',
+      duration: 2000,
+      color: 'warning',
+    }).then(t => t.present());
+  }
 
-      next: (res: any) => {
+  /* ================= REMOVE FILE ================= */
 
-        console.log(res);
+  removeSelectedFile() {
+    this.selectedFile = null as any;
+  }
 
-        this.getProfileImageView();
 
-        this.closeUploadModal();
-      },
+  /* ================= UPLOAD IMAGE ================= */
 
-      error: (err) => {
-        console.log(err);
-      }
+  uploadImage() {
 
-    });
-}
+    if (!this.selectedFile) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append(
+      'profileImage',
+      this.selectedFile
+    );
+
+    this.service.uploadImage(formData)
+      .subscribe({
+
+        next: (res: any) => {
+          this.getProfileImageView();
+          this.closeUploadModal();
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+  }
 }
