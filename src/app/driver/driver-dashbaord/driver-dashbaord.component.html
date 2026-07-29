@@ -20,7 +20,7 @@
       <ion-button fill="clear" color="dark" class="action-icon-btn" id="notification-trigger">
         <ion-icon name="notifications-outline"></ion-icon>
         @if (unreadCount > 0) {
-          <span class="badge-dot"></span>
+        <span class="badge-dot"></span>
         }
       </ion-button>
     </div>
@@ -34,23 +34,23 @@
         <ion-icon name="ellipse" class="blink-dot" color="success"></ion-icon>
       </div>
       @if (currentTask) {
-        <div class="widget-body">
-          <h2>{{ currentTask.vehicle || 'Mini van 03' }}</h2>
-          <p class="desc">{{ currentTask.orderId }}</p>
-          <p class="time-left">{{ currentTask.expectedTravelTime || 'Active trip' }}</p>
-          <ion-button size="small" class="widget-btn font-weight-bold" (click)="viewTaskDetails(currentTask)">
-            Task details
-          </ion-button>
-        </div>
+      <div class="widget-body">
+        <h2>{{ currentTask.vehicle || 'Mini van 03' }}</h2>
+        <p class="desc">{{ currentTask.orderId }}</p>
+        <p class="time-left">{{ currentTask.expectedTravelTime || 'Active trip' }}</p>
+        <ion-button size="small" class="widget-btn font-weight-bold" (click)="viewTaskDetails(currentTask)">
+          Task details
+        </ion-button>
+      </div>
       } @else {
-        <div class="widget-body empty-widget">
-          <h2>No Active Trip</h2>
-          <p class="desc">Take a job to start delivery</p>
-          <p class="time-left">Stay online</p>
-          <ion-button size="small" class="widget-btn disabled" disabled>
-            In-Active
-          </ion-button>
-        </div>
+      <div class="widget-body empty-widget">
+        <h2>No Active Trip</h2>
+        <p class="desc">Take a job to start delivery</p>
+        <p class="time-left">Stay online</p>
+        <ion-button size="small" class="widget-btn disabled" disabled>
+          In-Active
+        </ion-button>
+      </div>
       }
     </div>
 
@@ -61,23 +61,24 @@
         <ion-icon name="ellipse-outline" color="medium"></ion-icon>
       </div>
       @if (upcomingTask) {
-        <div class="widget-body">
-          <h2>{{ upcomingTask.vehicle || 'Mini van 05' }}</h2>
-          <p class="desc">{{ upcomingTask.orderId }}</p>
-          <p class="time-left">Ready for pickup</p>
-          <ion-button size="small" fill="outline" class="widget-btn border-teal font-weight-bold" (click)="viewTaskDetails(upcomingTask)">
-            Task details
-          </ion-button>
-        </div>
+      <div class="widget-body">
+        <h2>{{ upcomingTask.vehicle || 'Mini van 05' }}</h2>
+        <p class="desc">{{ upcomingTask.orderId }}</p>
+        <p class="time-left">Ready for pickup</p>
+        <ion-button size="small" fill="outline" class="widget-btn border-teal font-weight-bold"
+          (click)="viewTaskDetails(upcomingTask)">
+          Task details
+        </ion-button>
+      </div>
       } @else {
-        <div class="widget-body empty-widget">
-          <h2>No Assigned Job</h2>
-          <p class="desc">No tasks scheduled</p>
-          <p class="time-left">Ready for tasks</p>
-          <ion-button size="small" fill="outline" class="widget-btn disabled" disabled>
-            No Task
-          </ion-button>
-        </div>
+      <div class="widget-body empty-widget">
+        <h2>No Assigned Job</h2>
+        <p class="desc">No tasks scheduled</p>
+        <p class="time-left">Ready for tasks</p>
+        <ion-button size="small" fill="outline" class="widget-btn disabled" disabled>
+          No Task
+        </ion-button>
+      </div>
       }
     </div>
   </div>
@@ -122,64 +123,64 @@
 
 
   @if(orders.length > 0){
-    <div class="section-header mt-4">
-      <h3>Available Orders</h3>
-      <span class="badge-count">{{ orders.length }} Live</span>
-    </div>
+  <div class="section-header mt-4">
+    <h3>Available Orders</h3>
+    <span class="badge-count">{{ orders.length }} Live</span>
+  </div>
   }
   @if (orders.length > 0) {
-    <div class="order-list mt-2">
-      @for (item of orders; track $index) {
-        <ion-card class="order-card glass-card">
-          <div class="top-strip">
-            @if (item.status === 'Booked') {
-              <span class="tag new-tag">
-                New Booking
-              </span>
-            }
-            @if (item.rejected) {
-              <span class="tag reject-tag">
-                Rejected
-              </span>
-            }
-            <span class="price">₹{{ item.amount }}</span>
+  <div class="order-list mt-2">
+    @for (item of orders; track $index) {
+    <ion-card class="order-card glass-card">
+      <div class="top-strip">
+        @if (item.status === 'Booked') {
+        <span class="tag new-tag">
+          New Booking
+        </span>
+        }
+        @if (item.rejected) {
+        <span class="tag reject-tag">
+          Rejected
+        </span>
+        }
+        <span class="price">₹{{ item.amount }}</span>
+      </div>
+      <div class="order-main-details">
+        <div class="vehicle-icon-box">
+          <i class="fa fa-truck text-primary"></i>
+        </div>
+        <div class="order-meta">
+          <h3>{{ item.orderId }}</h3>
+          <div class="meta-chips">
+            <span>{{ item.vehicle?.name || 'N/A' }}</span>
+            <span>{{ item.vehicle?.capacity || 'N/A' }}</span>
+            <span>{{ item.weight || 'N/A' }}</span>
+            <span>{{ item.quantity }} Qty</span>
           </div>
-          <div class="order-main-details">
-            <div class="vehicle-icon-box">
-              <i class="fa fa-truck text-primary"></i>
-            </div>
-            <div class="order-meta">
-              <h3>{{ item.orderId }}</h3>
-              <div class="meta-chips">
-                <span>{{ item.vehicle?.name || 'N/A' }}</span>
-                <span>{{ item.vehicle?.capacity || 'N/A' }}</span>
-                <span>{{ item.weight || 'N/A' }}</span>
-                <span>{{ item.quantity }} Qty</span>
-              </div>
-            </div>
-          </div>
-          <div class="route-box">
-            <p>📍 {{ item.pickup?.location }}</p>
-            <p>🚚 {{ item.delivery?.location }}</p>
-          </div>
-          <div class="btn-row">
-            @if (!item.rejected && item.status === 'Booked') {
-              <ion-button color="success" size="small" (click)="acceptOrder(item)">
-                Accept Job
-              </ion-button>
-              <ion-button color="danger" fill="outline" size="small" (click)="rejectOrder(item)">
-                Reject
-              </ion-button>
-            }
-            @if (item.rejected) {
-              <ion-button disabled="true" color="medium" size="small">
-                Rejected
-              </ion-button>
-            }
-          </div>
-        </ion-card>
-      }
-    </div>
+        </div>
+      </div>
+      <div class="route-box">
+        <p>📍 {{ item.pickup?.location }}</p>
+        <p>🚚 {{ item.delivery?.location }}</p>
+      </div>
+      <div class="btn-row">
+        @if (!item.rejected && item.status === 'Booked') {
+        <ion-button color="success" size="small" (click)="acceptOrder(item)">
+          Accept Job
+        </ion-button>
+        <ion-button color="danger" fill="outline" size="small" (click)="rejectOrder(item)">
+          Reject
+        </ion-button>
+        }
+        @if (item.rejected) {
+        <ion-button disabled="true" color="medium" size="small">
+          Rejected
+        </ion-button>
+        }
+      </div>
+    </ion-card>
+    }
+  </div>
   }
   <div class="section-header mt-4">
     <h3>Recent tasks</h3>
@@ -187,99 +188,100 @@
   </div>
 
   @if (recentTasks.length === 0) {
-    <div class="empty-recent-tasks p-4 mt-2 text-center">
-      <ion-icon name="cube-outline" class="large-empty-icon"></ion-icon>
-      <p>No completed tasks found</p>
-    </div>
+  <div class="empty-recent-tasks p-4 mt-2 text-center">
+    <ion-icon name="cube-outline" class="large-empty-icon"></ion-icon>
+    <p>No completed tasks found</p>
+  </div>
   }
   @if (recentTasks.length > 0) {
-    <div class="recent-tasks-list mt-2">
-      @for (item of recentTasks; track $index) {
-        <div class="recent-task-card" (click)="viewTaskDetails(item)">
-          <!-- Left side contents -->
-          <div class="task-info-left">
-            <h2>{{ item.vehicle || 'Toyota 9382' }}</h2>
-            <p class="order-subtext">{{ item.orderId }}</p>
-            
-            <div class="date-row">
-              <ion-icon name="calendar-outline"></ion-icon>
-              <span>{{ item.pickup?.date || 'Monday, 4 Sept' }}</span>
-            </div>
-    
-            <div class="metrics-grid">
-              <div class="metric-item">
-                <span class="label">Trip No</span>
-                <span class="value">{{ item.tripNo || 'N/A' }}</span>
-              </div>
-              <div class="metric-item">
-                <span class="label">Amount</span>
-                <span class="value">₹{{ item.amount }}</span>
-              </div>
-              <div class="metric-item">
-                <span class="label">Distance</span>
-                <span class="value">{{ item.distance || '293 km' }}</span>
-              </div>
-            </div>
-    
-            <!-- Status badge and details trigger -->
-            <div class="tag-row mt-2">
-              <span class="status-badge" [ngClass]="{
+  <div class="recent-tasks-list mt-2">
+    @for (item of recentTasks; track $index) {
+    <div class="recent-task-card" (click)="viewTaskDetails(item)">
+      <!-- Left side contents -->
+      <div class="task-info-left">
+        <h2>{{ item.vehicle || 'Toyota 9382' }}</h2>
+        <p class="order-subtext">{{ item.orderId }}</p>
+
+        <div class="date-row">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ item.pickup?.date || 'Monday, 4 Sept' }}</span>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="label">Trip No</span>
+            <span class="value">{{ item.tripNo || 'N/A' }}</span>
+          </div>
+          <div class="metric-item">
+            <span class="label">Amount</span>
+            <span class="value">₹{{ item.amount }}</span>
+          </div>
+          <div class="metric-item">
+            <span class="label">Distance</span>
+            <span class="value">{{ item.distance || '293 km' }}</span>
+          </div>
+        </div>
+
+        <!-- Status badge and details trigger -->
+        <div class="tag-row mt-2">
+          <span class="status-badge" [ngClass]="{
                 'badge-completed': item.status === 'Delivered',
                 'badge-cancelled': item.status === 'Cancelled'
               }">
-                @if (item.status === 'Delivered') {
-                  <ion-icon name="checkmark-circle-outline"></ion-icon>
-                }
-                {{ item.status === 'Delivered' ? 'Completed' : 'Cancelled' }}
-              </span>
-              <span class="details-link">Details &gt;</span>
-            </div>
-          </div>
-    
-          <!-- Right side score indicator -->
-          <div class="task-score-right">
-            <div class="gauge-container">
-              <div class="gauge-bar" [ngClass]="getScoreClass(item.status)"></div>
-            </div>
-            <span class="score-label">{{ getScore(item.status) }}</span>
-          </div>
+            @if (item.status === 'Delivered') {
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            }
+            {{ item.status === 'Delivered' ? 'Completed' : 'Cancelled' }}
+          </span>
+          <span class="details-link">Details &gt;</span>
         </div>
-      }
+      </div>
+
+      <!-- Right side score indicator -->
+      <div class="task-score-right">
+        <div class="gauge-container">
+          <div class="gauge-bar" [ngClass]="getScoreClass(item.status)"></div>
+        </div>
+        <span class="score-label">{{ getScore(item.status) }}</span>
+      </div>
     </div>
+    }
+  </div>
   }
-  <ion-popover trigger="notification-trigger" side="bottom" alignment="end" [dismissOnSelect]="false" class="notification-popover">
+  <ion-popover trigger="notification-trigger" side="bottom" alignment="end" [dismissOnSelect]="false"
+    class="notification-popover">
     <ng-template>
       <div class="popover-header">
         <h4>Notifications</h4>
         @if(unreadCount > 0){
-          <ion-button fill="clear" size="small" color="primary" (click)="markAllAsRead()">
-            Mark all as read
-          </ion-button>
+        <ion-button fill="clear" size="small" color="primary" (click)="markAllAsRead()">
+          Mark all as read
+        </ion-button>
         }
       </div>
 
       <ion-content class="popover-body">
         @if (notifications.length === 0) {
-          <div class="empty-popover">
-            <p>No notifications available</p>
-          </div>
+        <div class="empty-popover">
+          <p>No notifications available</p>
+        </div>
         } @else {
-          <ion-list class="notification-list">
-            @for (n of notifications; track $index) {
-              <ion-item [ngClass]="{'unread-item': !n.isRead}" lines="full" class="notify-item">
-                <ion-label>
-                  <h3>{{ n.title }}</h3>
-                  <p>{{ n.message }}</p>
-                  <span class="notify-date">{{ n.createdAt | date: 'dd MMM, hh:mm a' }}</span>
-                </ion-label>
-                @if (!n.isRead) {
-                  <ion-button slot="end" fill="clear" size="small" color="primary" (click)="markAsRead(n, $event)">
-                    Mark Read
-                  </ion-button>
-                }
-              </ion-item>
+        <ion-list class="notification-list">
+          @for (n of notifications; track $index) {
+          <ion-item [ngClass]="{'unread-item': !n.isRead}" lines="full" class="notify-item">
+            <ion-label>
+              <h3>{{ n.title }}</h3>
+              <p>{{ n.message }}</p>
+              <span class="notify-date">{{ n.createdAt | date: 'dd MMM, hh:mm a' }}</span>
+            </ion-label>
+            @if (!n.isRead) {
+            <ion-button slot="end" fill="clear" size="small" color="primary" (click)="markAsRead(n, $event)">
+              Mark Read
+            </ion-button>
             }
-          </ion-list>
+          </ion-item>
+          }
+        </ion-list>
         }
       </ion-content>
     </ng-template>

@@ -14,6 +14,8 @@ import { AuthService } from '../service/authservice';
 import { DefultUsageService } from 'src/app/service/defult-usage.service';
 import { SocketService } from 'src/app/service/socket.service';
 
+import { PushNotificationService } from 'src/app/service/push-notification.service';
+
 @Component({
   selector: 'app-my-login',
   standalone: true,
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
     private apiService: AuthService,
     private defultService: DefultUsageService,
     private socketService: SocketService,
+    private pushService: PushNotificationService,
     private route: Router
   ) { }
 
@@ -65,6 +68,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
         localStorage.setItem('userId', res.user._id);
         this.socketService.joinRoom(res.user._id);
+        this.pushService.initPushNotifications();
         this.loginForm.reset();
         this.route.navigate(['/dashboard']);
       },

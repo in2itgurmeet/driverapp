@@ -27,7 +27,8 @@ export class MyOrdersComponent {
     4: 'Assigned',
     5: 'In-Transit',
     6: 'Delivered',
-    7: 'Cancelled'
+    7: 'Cancelled',
+    8: 'Rejected'
   };
 
   constructor(private api: Apiservice, private router: Router, private defultServise: DefultUsageService) { }
@@ -125,6 +126,8 @@ export class MyOrdersComponent {
       case 'Delivered':
         return 'bg-success text-white';
       case 'Cancelled':
+        return 'bg-danger text-white';
+      case 'Rejected':
         return 'bg-danger text-white';
       default:
         return 'bg-dark text-white';

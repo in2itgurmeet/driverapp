@@ -1,134 +1,255 @@
-<ion-content class="profile-content">
-  <form [formGroup]="DriverProfileForm">
-    <div class="profile-wrapper">
-      <div class="profile-card">
-        <div class="profile-image-wrapper">
-          <img [src]="profileImage" alt="Profile" class="profile-image" />
-          <div class="camera-icon" (click)="openUploadModal()">
-            <i class="fa fa-camera text-white"></i>
-          </div>
-        </div>
-        <h2 class="user-name">
-          {{ DriverProfileForm.value.name }}
-        </h2>
-        <p class="user-username">
-          {{ DriverProfileForm.value.email }}
-        </p>
-      </div>
-      <div class="upload-overlay" *ngIf="isUploadModalOpen" (click)="closeUploadModal()">
-        <div class="upload-modal" (click)="$event.stopPropagation()">
-          <div class="modal-header">
-            <h3>Upload Image</h3>
-            <ion-icon name="close-outline" class="close-icon" (click)="closeUploadModal()"></ion-icon>
-          </div>
-          <div class="upload-box" (click)="fileInput.click()">
-            <input type="file" hidden #fileInput accept="image/*" (change)="onFileSelected($event)" />
-            <ion-icon name="cloud-upload" class="upload-icon"></ion-icon>
-            <h2>Upload your file here</h2>
-            <p>Files supported: JPG, PNG</p>
-            <span class="or-text">OR</span>
-            <button type="button" class="browse-btn">
-              BROWSE
-            </button>
-            <small>Maximum size: 2MB</small>
-          </div>
-          <div class="file-preview" *ngIf="selectedFile">
-            <div class="file-left">
-              <ion-icon name="document" class="file-icon"></ion-icon>
-              <div>
-                <h4>{{ selectedFile.name }}</h4>
-                <p>
-                  {{ (selectedFile.size / 1024).toFixed(0) }} KB
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="btn-group">
-            <ion-button fill="outline" color="medium" (click)="closeUploadModal()">
-              Cancel
-            </ion-button>
-            <ion-button color="primary" [disabled]="!selectedFile" (click)="uploadImage()">
-              Upload
-            </ion-button>
-          </div>
-        </div>
-      </div>
-      <div class="form-card">
-        <div class="input-group">
-          <label>Name</label>
-          <ion-input type="text" fill="outline" formControlName="name">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Email</label>
-          <ion-input type="email" fill="outline" formControlName="email">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Phone</label>
-          <ion-input type="tel" fill="outline" formControlName="phone">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Address</label>
-          <ion-textarea autoGrow="true" fill="outline" formControlName="address">
-          </ion-textarea>
-        </div>
-        <div class="input-group">
-          <label>City</label>
-          <ion-input type="text" fill="outline" formControlName="city">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>State</label>
-          <ion-input type="text" fill="outline" formControlName="state">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Vehicle Number</label>
-          <ion-input type="text" fill="outline" formControlName="vehicleNumber">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Vehicle Type</label>
-          <ion-input type="text" fill="outline" formControlName="vehicleType">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Vehicle Capacity</label>
-          <ion-input type="text" fill="outline" formControlName="vehicleCapacity">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>License Number</label>
-          <ion-input type="text" fill="outline" formControlName="licenseNumber">
-          </ion-input>
-        </div>
-        <div class="input-group">
-          <label>Aadhaar Number</label>
-          <ion-input type="text" fill="outline" formControlName="aadhaarNumber">
-          </ion-input>
-        </div>
-        <div class="toggle-group">
-          <ion-item lines="none">
-            <ion-label>Online Status</ion-label>
-            <ion-toggle formControlName="isOnline">
-            </ion-toggle>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>Available</ion-label>
-            <ion-toggle formControlName="isAvailable">
-            </ion-toggle>
-          </ion-item>
-        </div>
-        <ion-button expand="block" shape="round" class="update-btn" (click)="updateProfile()">
-          Update Profile
-        </ion-button>
+<ion-content class="hide-scrollbar profile-content" fullscreen="true">
+  <!-- Top Teal Header Card Banner -->
+  <div class="header-bg">
+    <div class="header-nav">
+      <ion-button fill="clear" class="back-btn" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <h2>Driver Profile</h2>
+      <ion-button fill="clear" class="settings-btn" (click)="toggleEdit()">
+        <ion-icon [name]="isEditing ? 'close-outline' : 'create-outline'"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
 
-        <ion-button expand="block" shape="round" class="upgrade-btn" (click)="upgradeProfile()">
-          Upgrade Profile
-        </ion-button>
+  <div class="profile-container">
+    <!-- User Avatar Section (Overlapping) -->
+    <div class="avatar-wrapper">
+      <div class="avatar-inner" (click)="isEditing ? openUploadModal() : null">
+        <img [src]="profileImage" alt="User Profile Image" />
+        <div class="camera-badge" *ngIf="isEditing">
+          <ion-icon name="camera-outline"></ion-icon>
+        </div>
+      </div>
+      
+      <div class="user-meta text-center">
+        <h3>{{ DriverProfileForm.value.name || 'Driver Name' }}</h3>
+        <p>{{ DriverProfileForm.value.email || 'email@example.com' }}</p>
       </div>
     </div>
-  </form>
+
+    <div class="upload-overlay" *ngIf="isUploadModalOpen" (click)="closeUploadModal()">
+      <div class="upload-modal" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Upload Image</h3>
+          <ion-icon name="close-outline" class="close-icon" (click)="closeUploadModal()"></ion-icon>
+        </div>
+        <div class="upload-box" (click)="fileInput.click()">
+          <input type="file" hidden #fileInput accept="image/*" (change)="onFileSelected($event)" />
+          <ion-icon name="cloud-upload" class="upload-icon"></ion-icon>
+          <h2>Upload your file here</h2>
+          <p>Files supported: JPG, PNG</p>
+          <span class="or-text">OR</span>
+          <button type="button" class="browse-btn">BROWSE</button>
+          <small>Maximum size: 2MB</small>
+        </div>
+        <div class="file-preview" *ngIf="selectedFile">
+          <div class="file-left">
+            <ion-icon name="document" class="file-icon"></ion-icon>
+            <div>
+              <h4>{{ selectedFile.name }}</h4>
+              <p>{{ (selectedFile.size / 1024).toFixed(0) }} KB</p>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <ion-button fill="outline" color="medium" (click)="closeUploadModal()">Cancel</ion-button>
+          <ion-button color="primary" [disabled]="!selectedFile" (click)="uploadImage()">Upload</ion-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapped Stats Section (Placeholders for driver) -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <ion-icon name="cube-outline" class="stat-icon yellow"></ion-icon>
+        <div class="stat-val">12</div>
+        <div class="stat-label">Total Jobs</div>
+      </div>
+      <div class="stat-card">
+        <ion-icon name="star-outline" class="stat-icon teal-c"></ion-icon>
+        <div class="stat-val">4.9</div>
+        <div class="stat-label">Rating</div>
+      </div>
+      <div class="stat-card">
+        <ion-icon name="checkmark-done-outline" class="stat-icon green"></ion-icon>
+        <div class="stat-val">100%</div>
+        <div class="stat-label">Success Rate</div>
+      </div>
+    </div>
+
+    <div class="details-section">
+      <form [formGroup]="DriverProfileForm">
+        <div class="form-card">
+          <!-- Fields Wrapper -->
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="person-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Full Name</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("name")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="name" placeholder="Enter Full Name"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="mail-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Email Address</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("email")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="email" formControlName="email" placeholder="Enter Email"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="phone-portrait-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Mobile Number</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("phone")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="phone" placeholder="Enter Phone"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="car-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Vehicle Type</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("vehicleType")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="vehicleType" placeholder="Enter Vehicle Type"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="speedometer-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Vehicle Capacity</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("vehicleCapacity")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="vehicleCapacity" placeholder="Enter Capacity"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+          
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="pricetag-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Vehicle Number</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("vehicleNumber")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="vehicleNumber" placeholder="Enter Vehicle Number"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="card-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>License Number</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("licenseNumber")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="licenseNumber" placeholder="Enter License Number"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="document-text-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Aadhaar Number</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("aadhaarNumber")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="aadhaarNumber" placeholder="Enter Aadhaar Number"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          <div class="profile-field" [class.editable]="isEditing">
+            <span class="field-icon"><ion-icon name="location-outline"></ion-icon></span>
+            <div class="field-content">
+              <label>Street Address</label>
+              @if (!isEditing) {
+                <span class="view-val">{{ DriverProfileForm.get("address")?.value || "N/A" }}</span>
+              }
+              @if (isEditing) {
+                <ion-input type="text" formControlName="address" placeholder="Enter Address"></ion-input>
+              }
+            </div>
+            @if (!isEditing) { <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon> }
+          </div>
+
+          @if(isEditing) {
+            <div class="row g-2 mt-2 px-3">
+              <div class="col-6">
+                <ion-input type="text" formControlName="city" placeholder="City"></ion-input>
+              </div>
+              <div class="col-6">
+                <ion-input type="text" formControlName="state" placeholder="State"></ion-input>
+              </div>
+            </div>
+          }
+
+          <div class="profile-field" [class.editable]="isEditing" *ngIf="isEditing">
+            <div class="field-content">
+               <ion-item lines="none" style="--background: transparent">
+                  <ion-label>Online Status</ion-label>
+                  <ion-toggle formControlName="isOnline"></ion-toggle>
+               </ion-item>
+               <ion-item lines="none" style="--background: transparent">
+                  <ion-label>Available</ion-label>
+                  <ion-toggle formControlName="isAvailable"></ion-toggle>
+               </ion-item>
+            </div>
+          </div>
+
+        </div>
+
+        @if(isEditing) {
+          <div class="action-buttons px-2 mt-3">
+            <ion-button expand="block" class="save-btn" (click)="updateProfile()">
+              Save Profile Details
+            </ion-button>
+          </div>
+        }
+        @if(!isEditing) {
+          <div class="action-buttons px-2 mt-4">
+            <ion-button expand="block" color="danger" fill="outline" class="logout-btn" (click)="logout()">
+              <ion-icon name="log-out-outline" slot="start"></ion-icon>
+              Sign Out
+            </ion-button>
+          </div>
+        }
+      </form>
+    </div>
+  </div>
 </ion-content>

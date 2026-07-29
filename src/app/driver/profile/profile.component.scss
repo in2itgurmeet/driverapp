@@ -1,373 +1,299 @@
-/* profile.page.scss */
-
-.profile-content {
-  --background: #f3f3f3;
-}
-
-.profile-wrapper {
-  padding: 16px;
-}
-
-/* =========================
-   Profile Card
-========================= */
-
-.profile-card {
-  background: #ffffff;
-  border-radius: 22px;
-  padding: 30px 20px 24px;
-  text-align: center;
-  margin-bottom: 18px;
-}
-
-.profile-image-wrapper {
-  position: relative;
-  width: 95px;
-  height: 95px;
-  margin: 0 auto 18px;
-}
-
-.profile-image {
+.header-bg {
+  background: linear-gradient(135deg, #13b4c4 0%, #007685 100%);
+  height: 160px;
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #dbe7ff;
-}
-
-.camera-icon {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid #fff;
-
-  ion-icon {
-    color: #fff;
-    font-size: 18px;
-  }
-}
-
-.user-name {
-  font-size: 22px;
-  font-weight: 700;
-  color: #222;
-  margin: 0;
-}
-
-.user-username {
-  margin-top: 6px;
-  font-size: 16px;
-  color: #8b8b8b;
-}
-
-/* =========================
-   Form Card
-========================= */
-
-.form-card {
-  background: #ffffff;
-  border-radius: 22px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
   padding: 20px 16px;
-}
+  box-sizing: border-box;
 
-.input-group {
-  margin-bottom: 22px;
+  .header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    margin-top: 10px;
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #444;
-    font-weight: 500;
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    ion-button {
+      --color: #ffffff !important;
+      font-size: 20px;
+      margin: 0;
+      height: 40px;
+      width: 40px;
+      --padding-start: 0;
+      --padding-end: 0;
+    }
   }
 }
 
-/* Ionic Input Outline */
-
-ion-input {
-  --border-radius: 12px;
-  --padding-start: 14px;
-  --padding-end: 14px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
-
-  font-size: 16px;
-  color: #222;
+.profile-container {
+  padding: 0 16px 85px 16px;
+  background: #f7f9fa;
+  min-height: calc(100vh - 160px);
 }
 
-/* Active Border */
-
-ion-input.ion-focused {
-  --border-color: #4c8dff;
-}
-
-/* Date Input */
-
-.date-item {
-  --background: transparent;
-  --border-color: #d9d9d9;
-  --border-width: 1px;
-  --border-style: solid;
-  --border-radius: 12px;
-
-  min-height: 54px;
-  padding-inline-start: 12px;
-  padding-inline-end: 12px;
-
-  ion-input {
-    --padding-start: 0;
-  }
-
-  ion-icon {
-    font-size: 20px;
-    color: #777;
-  }
-}
-/* ================= PROFILE IMAGE ================= */
-
-.profile-image-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  margin: auto;
-}
-
-.profile-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #fff;
-}
-
-.camera-icon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-
-  background: #2563eb;
-
+.avatar-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-top: -60px;
+  margin-bottom: 24px;
 
-  cursor: pointer;
-  border: 3px solid #fff;
+  .avatar-inner {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    cursor: pointer;
 
-  i {
-    font-size: 16px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .camera-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: #13b4c4;
+      color: #ffffff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      border: 2px solid #ffffff;
+
+      ion-icon {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .user-meta {
+    margin-top: 12px;
+
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1A3038;
+      margin: 0 0 4px 0;
+    }
+
+    p {
+      font-size: 13px;
+      color: #718096;
+      margin: 0;
+    }
   }
 }
 
-/* ================= OVERLAY ================= */
-
-.upload-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(0, 0, 0, 0.55);
-
-  z-index: 99999;
-
+.stats-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
 
-  padding: 20px;
+  .stat-card {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    border: 1px solid #edf2f7;
 
-  backdrop-filter: blur(3px);
+    .stat-icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+
+      &.yellow {
+        color: #ECC94B;
+      }
+      &.teal-c {
+        color: #13B4C4;
+      }
+      &.green {
+        color: #48BB78;
+      }
+    }
+
+    .stat-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1A3038;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #A0AEC0;
+      text-align: center;
+      margin-top: 2px;
+    }
+  }
 }
 
-/* ================= MODAL ================= */
+.details-section {
+  .form-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    border: 1px solid #edf2f7;
+    margin-bottom: 20px;
+  }
 
-.upload-modal {
-  width: 100%;
-  max-width: 420px;
+  .profile-field {
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    border-bottom: 1px solid #f7f9fa;
+    transition: all 0.2s ease;
 
-  background: #fff;
+    &:last-child {
+      border-bottom: none;
+    }
 
+    .field-icon {
+      background: #F3F7F8;
+      color: #13B4C4;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+      font-size: 18px;
+    }
+
+    .field-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-size: 10px;
+        font-weight: 700;
+        color: #A0AEC0;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+
+      .view-val {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1A3038;
+      }
+
+      ion-input {
+        --background: #F3F7F8;
+        --border-radius: 8px;
+        --padding-start: 10px;
+        --color: #1A3038;
+        background: #F3F7F8;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+        height: 38px;
+        font-size: 13px;
+        margin: 0;
+      }
+    }
+
+    .chevron {
+      color: #A0AEC0;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+
+    &.editable {
+      padding: 8px 14px;
+      border-bottom: none;
+      
+      .field-icon {
+        display: none;
+      }
+    }
+  }
+}
+
+.promo-banner {
+  background: linear-gradient(135deg, #FF6F00 0%, #FF8F00 100%);
   border-radius: 16px;
-
-  padding: 20px;
-
-  animation: popupAnimation 0.25s ease;
-}
-
-/* ================= HEADER ================= */
-
-.modal-header {
+  padding: 18px;
+  color: #ffffff;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  margin-bottom: 20px;
-
-  h3 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 700;
-    color: #111;
-  }
-}
-
-.close-icon {
-  font-size: 24px;
-  color: #666;
-  cursor: pointer;
-}
-
-/* ================= UPLOAD BOX ================= */
-
-.upload-box {
-  border: 2px dashed #c7d7ff;
-
-  border-radius: 12px;
-
-  padding: 35px 20px;
-
-  text-align: center;
-
-  cursor: pointer;
-
-  transition: 0.3s;
-
-  &:hover {
-    background: #f8fbff;
-  }
-}
-
-.upload-icon {
-  font-size: 52px;
-  color: #2563eb;
-  margin-bottom: 14px;
-}
-
-.upload-box h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 8px;
-}
-
-.upload-box p {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 12px;
-}
-
-.or-text {
-  display: block;
-  margin-bottom: 14px;
-  color: #555;
-  font-weight: 600;
-}
-
-.browse-btn {
-  border: 1px solid #2563eb;
-  background: transparent;
-  color: #2563eb;
-
-  padding: 10px 22px;
-
-  border-radius: 6px;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  margin-bottom: 12px;
-}
-
-.upload-box small {
-  display: block;
-  color: #888;
-}
-
-/* ================= FILE PREVIEW ================= */
-
-.file-preview {
-  margin-top: 18px;
-
-  background: #f5f3f3;
-
-  border-radius: 10px;
-
-  padding: 14px;
-
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-}
+  box-shadow: 0 6px 20px rgba(255, 111, 0, 0.25);
 
-.file-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+  .promo-content {
+    h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 4px 0;
+    }
 
-.file-icon {
-  font-size: 26px;
-  color: #2563eb;
-}
+    p {
+      font-size: 11px;
+      margin: 0 0 12px 0;
+      opacity: 0.9;
+    }
 
-.file-preview h4 {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 600;
-  color: #111;
-}
-
-.file-preview p {
-  margin: 0;
-  font-size: 12px;
-  color: #777;
-}
-
-.delete-icon {
-  font-size: 24px;
-  color: red;
-  cursor: pointer;
-}
-
-/* ================= BUTTONS ================= */
-
-.btn-group {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-
-  margin-top: 22px;
-}
-
-.update-btn, .upgrade-btn {
-  --border-radius: calc(10 * var(--px));
-  font-weight: 700;
-}
-
-/* ================= ANIMATION ================= */
-
-@keyframes popupAnimation {
-
-  from {
-    opacity: 0;
-    transform: scale(0.92);
+    .promo-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      width: fit-content;
+    }
   }
 
-  to {
-    opacity: 1;
-    transform: scale(1);
+  .promo-graphics {
+    .gift-box {
+      font-size: 45px;
+      opacity: 0.85;
+      transform: rotate(15deg);
+    }
+  }
+}
+
+.action-buttons {
+  ion-button {
+    --border-radius: 25px !important;
+    height: 50px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+  }
+
+  .save-btn {
+    --background: #13b4c4 !important;
+    --color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(19, 180, 196, 0.25) !important;
+  }
+
+  .logout-btn {
+    --border-width: 1px !important;
+    --border-style: solid !important;
+    font-weight: 600 !important;
   }
 }

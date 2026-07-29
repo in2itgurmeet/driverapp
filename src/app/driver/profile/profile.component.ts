@@ -5,9 +5,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IonicModule, ToastController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Apiservice } from '../service/apiservice';
+import { Router } from '@angular/router';
+import { DefultUsageService } from '../../service/defult-usage.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +22,7 @@ export class ProfileComponent implements OnInit {
   DriverProfileForm!: FormGroup;
   isUploadModalOpen = false;
   selectedFile!: File;
+  isEditing = false;
 
   profileImage: string =
     'https://ionicframework.com/docs/img/demos/avatar.svg';
@@ -28,10 +31,24 @@ export class ProfileComponent implements OnInit {
     this.isUploadModalOpen = true;
   }
 
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
+  goBack() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
   constructor(
     private service: Apiservice,
     private fb: FormBuilder,
-    private toastController: ToastController
+    private defulService: DefultUsageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -105,23 +122,33 @@ export class ProfileComponent implements OnInit {
     if (this.DriverProfileForm.invalid) {
       return;
     }
-    const data = this.DriverProfileForm.value;
+    const formValue = this.DriverProfileForm.value;
+    const data = {
+      name: formValue.name,
+      email: formValue.email,
+      phone: formValue.phone,
+      driver: {
+        vehicleNumber: formValue.vehicleNumber,
+        vehicleType: formValue.vehicleType,
+        vehicleCapacity: formValue.vehicleCapacity,
+        licenseNumber: formValue.licenseNumber,
+        aadhaarNumber: formValue.aadhaarNumber,
+        address: formValue.address,
+        city: formValue.city,
+        state: formValue.state,
+        pincode: formValue.pincode,
+        isOnline: formValue.isOnline,
+        isAvailable: formValue.isAvailable
+      }
+    };
+    
     this.service.updateDriverProfile(data).subscribe({
       next: async (res: any) => {
-        const toast = await this.toastController.create({
-          message: 'Profile updated successfully',
-          duration: 2000,
-          color: 'success',
-        });
-        toast.present();
+        this.isEditing = false;
+        this.defulService.successToast('Profile updated successfully');
       },
       error: async (err) => {
-        const toast = await this.toastController.create({
-          message: 'Something went wrong',
-          duration: 2000,
-          color: 'danger',
-        });
-        toast.present();
+        this.defulService.errorToast('Something went wrong');
       },
     });
   }
@@ -158,21 +185,13 @@ export class ProfileComponent implements OnInit {
   }
 
   upgradeProfile() {
-    this.toastController.create({
-      message: 'Upgrade functionality coming soon!',
-      duration: 2000,
-      color: 'warning',
-    }).then(t => t.present());
+    this.defulService.warningToast('Upgrade functionality coming soon!');
   }
 
-  /* ================= REMOVE FILE ================= */
 
   removeSelectedFile() {
     this.selectedFile = null as any;
   }
-
-
-  /* ================= UPLOAD IMAGE ================= */
 
   uploadImage() {
 

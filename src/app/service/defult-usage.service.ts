@@ -620,7 +620,17 @@ vehicles = [
     await toast.present();
   }
 
+  async warningToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 3000,
+      position: 'top',
+      color: 'warning',
+      icon: 'warning'
+    });
 
+    await toast.present();
+  }
 
 
 
