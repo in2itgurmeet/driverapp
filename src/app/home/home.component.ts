@@ -7,7 +7,8 @@ import {
   homeOutline,
   bagHandleOutline,
   gridOutline,
-  personOutline
+  personOutline,
+  arrowForwardOutline
 } from 'ionicons/icons';
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomeComponent implements OnInit {
       'home-outline': homeOutline,
       'bag-handle-outline': bagHandleOutline,
       'grid-outline': gridOutline,
-      'person-outline': personOutline
+      'person-outline': personOutline,
+      'arrow-forward-outline': arrowForwardOutline
     });
   }
 

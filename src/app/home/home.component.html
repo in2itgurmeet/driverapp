@@ -1,0 +1,39 @@
+<ion-content class="onboarding-content" [fullscreen]="true">
+  <div class="onboarding-container">
+    
+    <!-- Top Header -->
+    <div class="top-header fade-down">
+      <div class="logo-btn">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
+      <div class="menu-btn">
+        <ion-icon name="grid-outline"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Title Section -->
+    <div class="title-section slide-right">
+      <p class="subtitle">The complete logistic partner for</p>
+      <p class="subtitle">seamless transportation</p>
+      <h1 class="main-title">Bringing The<br>World Closer</h1>
+    </div>
+
+    <!-- Image Section -->
+    <div class="image-section">
+      <div class="truck-wrapper drive-through">
+        <img src="assets/image/dasboard_truck_logo.png" alt="Truck" class="truck-img" onerror="this.src='https://firebasestorage.googleapis.com/v0/b/your-project.appspot.com/o/truck-placeholder.png?alt=media'"/>
+      </div>
+    </div>
+
+    <!-- Bottom Action -->
+    <div class="bottom-action slide-up-delayed">
+      <div class="action-btn" (click)="router.navigate(['/auth'])">
+        <div class="btn-icon">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </div>
+        <span class="btn-text">Get Started</span>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

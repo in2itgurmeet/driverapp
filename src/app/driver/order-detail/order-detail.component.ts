@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Apiservice } from '../service/apiservice';
+import { OfflineSyncService } from '../../core/services/offline-sync.service';
 import { arrowBackOutline, callOutline, mapOutline, checkmarkCircleOutline, documentTextOutline, imageOutline, createOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 
@@ -36,6 +37,7 @@ export class OrderDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private api: Apiservice,
+    private offlineSync: OfflineSyncService,
     private toastController: ToastController
   ) {
     addIcons({
@@ -180,7 +182,7 @@ export class OrderDetailComponent implements OnInit {
     }
   }
 
-  submitPOD() {
+  async submitPOD() {
     if (!this.receiverName.trim()) {
       this.showToast('Please enter receiver name', 'warning');
       return;
@@ -200,6 +202,18 @@ export class OrderDetailComponent implements OnInit {
       receiverName: this.receiverName,
       receiverMobile: this.receiverMobile
     };
+
+    const isOnline = await this.offlineSync.getNetworkStatus();
+
+    if (!isOnline) {
+      await this.offlineSync.saveOfflinePod(this.orderData._id, payload);
+      this.closePodModal();
+      this.orderData.status = 'Delivered'; // Optimistic UI update
+      setTimeout(() => {
+        this.router.navigate(['/dashboard/myOrders']);
+      }, 1000);
+      return;
+    }
 
     this.api.uploadPOD(this.orderData._id, payload).subscribe({
       next: (res: any) => {
