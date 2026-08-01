@@ -11,6 +11,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoaderService } from '../service/loader.service';
+import { DefultUsageService } from '../service/defult-usage.service';
 
 export const IS_PUBLIC_API = new HttpContextToken<boolean>(() => false);
 export const NO_LOADER = new HttpContextToken<boolean>(() => false);
@@ -20,7 +21,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private defultService: DefultUsageService
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -52,6 +54,9 @@ export class AuthInterceptor implements HttpInterceptor {
           localStorage.removeItem('token');
           this.router.navigate(['/auth']);
         }
+
+        const msg = error.error?.message || error.message || 'An unexpected error occurred';
+        this.defultService.errorToast(msg);
 
         return throwError(() => error);
       }),

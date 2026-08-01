@@ -601,7 +601,7 @@ vehicles = [
       message: msg,
       duration: 3000,
       position: 'top',
-      color: 'success',
+      cssClass: 'design-toast success-toast',
       icon: 'checkmark-circle'
     });
 
@@ -613,7 +613,7 @@ vehicles = [
       message: msg,
       duration: 3000,
       position: 'top',
-      color: 'danger',
+      cssClass: 'design-toast error-toast',
       icon: 'close-circle'
     });
 
@@ -625,7 +625,7 @@ vehicles = [
       message: msg,
       duration: 3000,
       position: 'top',
-      color: 'warning',
+      cssClass: 'design-toast warning-toast',
       icon: 'warning'
     });
 

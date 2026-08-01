@@ -2870,7 +2870,15 @@ ion-toast.error-toast {
   }
 }
 
+ion-toast.warning-toast {
+  --box-shadow: 0 10px 30px rgba(255, 205, 2, 0.12) !important;
+  
+  &::part(container) {
+    border-left: 5px solid var(--ion-color-warning, #ffcd02) !important;
+  }
 
-
-
+  &::part(icon) {
+    color: var(--ion-color-warning, #ffcd02) !important;
+  }
+}
 
